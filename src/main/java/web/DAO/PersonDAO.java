@@ -3,34 +3,32 @@ package web.DAO;
 import org.springframework.stereotype.Component;
 import web.Persons.Person;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.List;
 
 @Component
 public class PersonDAO {
-    private static int iterateId;
-    private List<Person> people;
-    {
-        people= new ArrayList<>();
-        people.add(new Person(++iterateId,"nam","vam"));
-        people.add(new Person(++iterateId,"tam","pam"));
-        people.add(new Person(++iterateId,"num","vim"));
-        people.add(new Person(++iterateId,"zam","ram"));
-    }
-    public List<Person> allUsers(){
-        return people;
-    }
+
+
+    private EntityManager entityManager;
+
+    public List<Person> allUsers()  {
+    return entityManager.createQuery("SELECT t.* FROM `schema_2.3.1`.person t", Person.class).getResultList();
+        }
     public Person oneUser(int id){
-        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+
+        return entityManager.find(Person.class, id);
     }
     public void save(Person person){
-        person.setId(++iterateId);
-        people.add(person);
+         entityManager.persist(person);
     }
     public void update(int id, Person updatedPerson){
-        Person personToBeUpdated = oneUser(id);
-        personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setName(updatedPerson.getLastname());
-    }
+         entityManager.merge(updatedPerson);
 
+    }
+    public void delete(int id) {
+         entityManager.remove(oneUser(id));
+    }
 }

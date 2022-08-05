@@ -18,7 +18,7 @@ public class Control {
 
 
 
-    @GetMapping
+    @GetMapping("/allUsers")
     public String allUsers(Model model){
         model.addAttribute("people",personDAO.allUsers());
         return "allUsers";
@@ -38,14 +38,19 @@ public class Control {
         personDAO.save(person);
         return "redirect:/allUsers";
     }
-    @GetMapping("/{id}/edit")
-    public String edit(Model model,@PathVariable("id") int id){
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, Model model){
         model.addAttribute("people",personDAO.oneUser(id));
         return "edit";
     }
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("people")Person person, @PathVariable("id") int id){
         personDAO.update(id, person);
+        return "redirect:/allUsers";
+    }
+    @DeleteMapping ("/{id}")
+    public String delete(@PathVariable("id") int id){
+        personDAO.delete(id);
         return "redirect:/allUsers";
     }
 }

@@ -1,8 +1,24 @@
 package web.Persons;
 
+import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+
+@Entity(name = Person.PERSISTANCE_NAME)
+@Component
+@Table(name = "person")
 public class Person {
+    static final String PERSISTANCE_NAME = "Person";
+    @ToString.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @ToString.Include
+    @Column(name = "name")
     private String name;
+    @ToString.Include
+    @Column(name = "lastname")
     private String lastname;
     public Person(){
 
