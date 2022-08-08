@@ -15,7 +15,7 @@ public class PersonDAO {
     private EntityManager entityManager;
 
     public List<Person> allUsers()  {
-    return entityManager.createQuery("SELECT t.* FROM `schema_2.3.1`.person t", Person.class).getResultList();
+    return entityManager.createQuery("SELECT t FROM Person t", Person.class).getResultList();
         }
     public Person oneUser(int id){
 
