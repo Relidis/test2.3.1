@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Список пользователей</title>
+    <title>Table</title>
     <style>
         table {
             width: 40%;
@@ -33,18 +33,18 @@
 
     </tr>
     <tbody>
-    <tr th:each="person : ${people}">
+    <tr th:each="person : ${person}">
 
         <td th:utext="${person.getId()}"></td>
         <td th:utext="${person.getName()}"></td>
         <td th:utext="${person.getLastname()}"></td>
         <td>
-            <form  th:action="@{/edit/{id}(id=${person.getId()})}" th:object="${people}">
+            <form  th:action="@{/edit/{id}(id=${person.getId()})}" th:object="${person}">
                 <button type="submit">Update</button>
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{/{id}(id=${person.getId()})}" th:object="${people}">
+            <form th:method="DELETE" th:action="@{/{id}(id=${person.getId()})}" th:object="${person}">
                 <button type="submit">Delete</button>
             </form>
         </td>

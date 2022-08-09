@@ -12,7 +12,7 @@
         <th>Last Name</th>
     </tr>
     <tbody>
-    <tr th:each="person : ${people}">
+    <tr th:each="person : ${person}">
         <td th:utext="${person.getId()}"></td>
         <td th:utext="${person.getName()}"></td>
         <td th:utext="${person.getLastname()}"></td>

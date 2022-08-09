@@ -20,31 +20,31 @@ public class Control {
 
     @GetMapping("/allUsers")
     public String allUsers(Model model){
-        model.addAttribute("people",personDAO.allUsers());
+        model.addAttribute("person",personDAO.allUsers());
         return "allUsers";
     }
     @GetMapping("/{id}")
     public String oneUser(@PathVariable("id") int id, Model model){
-        model.addAttribute("people",personDAO.oneUser(id));
+        model.addAttribute("person",personDAO.oneUser(id));
         return "oneUser";
     }
     @GetMapping("/new")
     public String newUser(Model model){
-        model.addAttribute("people",new Person());
+        model.addAttribute("person",new Person());
         return "new";
     }
     @PostMapping()
-    public String create(@ModelAttribute("people") Person person){
+    public String create(@ModelAttribute("person") Person person){
         personDAO.save(person);
         return "redirect:/allUsers";
     }
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") int id, Model model){
-        model.addAttribute("people",personDAO.oneUser(id));
+        model.addAttribute("person",personDAO.oneUser(id));
         return "edit";
     }
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("people")Person person, @PathVariable("id") int id){
+    @PatchMapping("/edit/{id}")
+    public String update(@ModelAttribute("person")Person person, @PathVariable("id") int id){
         personDAO.update(id, person);
         return "redirect:/allUsers";
     }
