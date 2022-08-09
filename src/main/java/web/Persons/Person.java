@@ -15,10 +15,10 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ToString.Include
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
     @ToString.Include
-    @Column(name = "lastname")
+    @Column(name = "lastname", length = 50)
     private String lastname;
     public Person(){
 
